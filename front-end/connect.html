@@ -11,13 +11,32 @@
     <section class="authentification" id="authentification">
         <img class="authentification__logo" src="images/icon-left-font-monochrome-black.svg">
         <div>
-            <button class="btn btn-secondary" v-on:click="formulaire_inscription">S'inscrire</button>
-            <button class="btn btn-secondary" v-on:click="formulaire_authentification">Se connecter</button>
-            <button class="btn btn-secondary" v-show="test">Se connecter</button>
-
+            <button class="btn btn-secondary" v-on:click="formulaire__inscription = !formulaire__inscription">S'inscrire</button>
+            <button class="btn btn-secondary" v-on:click="formulaire__authentification = !formulaire__authentification">Se connecter</button>
         </div>
-        <form>
-
+        <form v-if="formulaire__inscription">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Votre email</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="azerty@mail.com" placeholder="azerty@mail.com">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Votre mot de passe</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Votre mot de passe">
+                <label for="exampleInputPassword1">Retappez votre mot de passe</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Votre mot de passe">
+              </div>
+              <button type="submit" class="btn btn-dark">Créer votre compte</button>
+        </form>
+        <form v-if="formulaire__authentification">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Votre email</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="azerty@mail.com" placeholder="azerty@mail.com">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Votre mot de passe</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Votre mot de passe">
+              </div>
+              <button type="submit" class="btn btn-dark">Se connecter</button>
         </form>
     </section>
 
