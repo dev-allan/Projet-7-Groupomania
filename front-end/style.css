@@ -4,3 +4,38 @@
     align-items: center;
     justify-content: center;
 }
+
+.transition__inscription-enter-active, .transition__inscription-leave-active {
+    transition: opacity .5s;
+}
+.transition__inscription-enter, .transition__inscription-leave-to{
+    opacity: 0;
+}
+
+.transition__authentification-enter-active, .transition__authentification-leave-active {
+    transition: opacity .5s;
+}
+.transition__authentification-enter, .transition__authentification-leave-to{
+    opacity: 0;
+}
+
+.navbar-dark{
+    display : flex;
+    flex-direction: row;
+}
+
+.navbar-nav{
+    flex-direction: row;
+    justify-content: space-between;
+    font-size : 12px;
+}
+
+.nav-item{
+    margin : 0px 50px 0px 50px;
+}
+
+.navbar-brand .icon{
+    height: 20px;
+    margin-left: 5px;
+
+}

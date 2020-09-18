@@ -14,30 +14,34 @@
             <button class="btn btn-secondary" v-on:click="formulaire__inscription = !formulaire__inscription">S'inscrire</button>
             <button class="btn btn-secondary" v-on:click="formulaire__authentification = !formulaire__authentification">Se connecter</button>
         </div>
-        <form v-if="formulaire__inscription">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Votre email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="azerty@mail.com" placeholder="azerty@mail.com">
-              </div>
+        <transition name="transition__inscription">
+          <form v-if="formulaire__inscription">
               <div class="form-group">
-                <label for="exampleInputPassword1">Votre mot de passe</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Votre mot de passe">
-                <label for="exampleInputPassword1">Retappez votre mot de passe</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Votre mot de passe">
-              </div>
-              <button type="submit" class="btn btn-dark">Créer votre compte</button>
-        </form>
-        <form v-if="formulaire__authentification">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Votre email</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="azerty@mail.com" placeholder="azerty@mail.com">
-              </div>
+                  <label for="exampleInputEmail1">Votre email</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="azerty@mail.com" placeholder="azerty@mail.com">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Votre mot de passe</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Votre mot de passe">
+                  <label for="exampleInputPassword1">Retappez votre mot de passe</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Votre mot de passe">
+                </div>
+                <button type="submit" class="btn btn-dark">Créer votre compte</button>
+          </form>
+        </transition>
+        <transition name="transition__authentification">
+          <form v-if="formulaire__authentification">
               <div class="form-group">
-                <label for="exampleInputPassword1">Votre mot de passe</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Votre mot de passe">
-              </div>
-              <button type="submit" class="btn btn-dark">Se connecter</button>
-        </form>
+                  <label for="exampleInputEmail1">Votre email</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="azerty@mail.com" placeholder="azerty@mail.com">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Votre mot de passe</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Votre mot de passe">
+                </div>
+                <button type="submit" class="btn btn-dark">Se connecter</button>
+          </form>
+        </transition>
     </section>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
