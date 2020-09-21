@@ -45,16 +45,34 @@ exports.sendArticles = (req, res, next)=>{
 }
 
 exports.deleteArticles = (req, res, next)=>{
-    var id = "1"
+    var id = ""
     var data = [id]
     mysqlConnection.query('DELETE FROM articles WHERE id=?', data, (err,rows, fields)=>{
         if(!err)
         {
             res.send(rows);
         }
-    else
+        else
         {
             console.log(err);
         }  
+    })
+}
+
+exports.modifyArticles = (req, res, next)=>{
+    var titre = ""
+    var contenu = ""
+    var court = ""
+    var id = ""
+    var data = [titre, contenu,court, id]
+    mysqlConnection.query('UPDATE articles SET titre=?, contenu=?, court=? WHERE id=?', data, (err, rows, fields)=> {
+        if(!err)
+        {
+            res.send(rows);
+        }
+        else
+        {
+            console.log(err);
+        }         
     })
 }

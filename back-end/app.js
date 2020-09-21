@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const articlesRoute = require('./routes/articleRoute.js')
+const articlesRoute = require('./routes/articleRoute.js');
+const commentRoute = require('./routes/commentRoute.js');
+const userRoute = require('./routes/userRoute')
 
 var app = express();
 
@@ -14,5 +16,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use('/articles', articlesRoute);
+app.use('/commentaires', commentRoute);
+app.use('/utilisateurs', userRoute)
 
 module.exports = app;

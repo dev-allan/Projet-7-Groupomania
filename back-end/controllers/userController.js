@@ -1,21 +1,35 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+let mysqlConnection = require('../connection');
 
 exports.signup = (req, res, next) => {
-    connection.connect(function(err) {
-        if (err) throw err;
-        console.log("Connected!");
-        var sql = "INSERT INTO customers (name, address) VALUES ?";
-        var values = [
-          [req.body.pseudo, bcrypt.hash(req.body.password, 10)],
-        ];
-        connection.query(sql, [values], function (err, result) {
-          if (err) throw err;
-          console.log("Number of records inserted: " + result.affectedRows);
-        });
-    });
-};
+    var login = "emailtestcrypto@exemple.fr"
+    var password = "123"
+    let crypto = require('crypto')
+    const hash = crypto.createHmac('sha256', password)
+                .update(';zedo5666efhebms,zljjdbeiohfk"rjbfiu"hedpndOKO216POkjzebfpzksùzaep"éoroihfjenmzjduEEE---czstr')
+                .digest('hex');
+    var data = [login, hash]
+    mysqlConnection.query("INSERT INTO utilisateurs SET login=?, password=?", data,(err, rows,field)=>{
+      if (!err) {
+        res.send(rows);
+    }
+
+    else {
+        console.log(err);
+    }
+    })
+}
 
 exports.login = (req, res, next) => {
-    
-};
+    var login = 'emailtest@exemple.fr'
+    var password = '123'
+    var data = [login, password]
+    mysqlConnection.query("SELECT * FROM utilisateurs WHERE login =? AND password=?", data,(err, rows,field)=>{
+      if (!err) {
+        res.send(rows);
+    }
+
+    else {
+        console.log(err);
+    }
+    })
+}
