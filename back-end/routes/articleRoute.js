@@ -1,19 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const mysqlConnection = require('../connection');
+const articleCtrl = require('../controllers/articleController.js')
 
-router.get('/', (req, res) =>{
-    mysqlConnection.query("SELECT * FROM articles", (err, rows, fields)=>{
-        if(!err)
-            {
-                res.send(rows);
-            }
-        else
-            {
-                console.log(err);
-            }
-    })
-});
+router.get('/', articleCtrl.getAllArticles);
+router.get('/id', articleCtrl.getOneArticle);
+router.post('/send', articleCtrl.sendArticles);
+// router.delete('/delete', articleCtrl.deleteArticles);
+
 
 
 
