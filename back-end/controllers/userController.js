@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 let mysqlConnection = require('../connection');
 
 exports.signup = (req, res, next) => {
@@ -26,6 +27,10 @@ exports.login = (req, res, next) => {
     mysqlConnection.query("SELECT * FROM utilisateurs WHERE login =? AND password=?", data,(err, rows,field)=>{
       if (!err) {
         res.send(rows);
+        const token = jwt.sign({ data }, "123456");
+        res.json({
+          token : token
+        });
     }
 
     else {
@@ -33,3 +38,13 @@ exports.login = (req, res, next) => {
     }
     })
 }
+
+
+
+// exports.login = (req, res, next) => {
+//   const user = {id : 3};
+//   const token = jwt.sign({ user }, "123456");
+//   res.json({
+//     token : token
+//   });
+// };
