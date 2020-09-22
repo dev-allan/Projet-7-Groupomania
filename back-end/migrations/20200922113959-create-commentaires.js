@@ -10,9 +10,10 @@ module.exports = {
       },
       pseudo: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
         references : {
-          
+          model : "utilisateurs",
+          key : "id"
         }
       },
       contenu_commentaire: {

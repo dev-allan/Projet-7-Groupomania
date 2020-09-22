@@ -4,7 +4,7 @@ var mysqlConnection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : '',
-    database : 'groupomania',
+    database : 'projet7_development',
     multipleStatements : true
 });
 
