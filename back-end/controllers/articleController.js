@@ -1,4 +1,6 @@
 let mysqlConnection = require('../connection');
+let models = require('../models/articles');
+let jwtUtils = require('../middleware/auth')
 
 exports.getAllArticles = (req, res, next)=>{
     mysqlConnection.query("SELECT * FROM articles", (err, rows, fields)=>{
@@ -29,11 +31,11 @@ exports.getOneArticle = (req, res, next)=>{
 }
 
 exports.sendArticles = (req, res, next)=>{
-    var titre = ""
-    var contenu = ""
-    var court = ""
+    var titre = req.body.title
+    var contenu = req.body.content
+    var court = req.body.smallContent
     var data = [titre, contenu, court]
-    mysqlConnection.query('INSERT INTO articles SET titre =?, contenu =?, court =?',data, (err, articles, fields) => {
+    mysqlConnection.query('INSERT INTO articles SET titre =?, contenu =?, court =?, createdAt =NOW(), updatedAt =NOW()',data, (err, articles, fields) => {
         if (!err) {
             res.send(articles);
         }
