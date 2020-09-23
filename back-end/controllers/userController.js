@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
 let mysqlConnection = require('../connection');
 let models = require('../models');
-const jwtUtils = require('../utils/jwt.utils');
+const jwtUtils = require('../middleware/auth');
+const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const passwordRegex = /^[a-zA-Z]\w{3,14}$/;
 
 exports.signup = (req, res, next) => {
   //Paramètres
@@ -10,6 +12,12 @@ exports.signup = (req, res, next) => {
 
   if (login == null || password == null){
     return res.status(400).json({'error' : "mauvais paramètres"})
+  }
+  if (!emailRegex.test(login)){
+    return res.status(400).json({'error' : "Email invalide"})
+  }
+  if (!passwordRegex.test(password)){
+    return res.status(400).json({'error' : "Mot de passe invalide"})
   }
 
   models.utilisateurs.findOne({
@@ -70,5 +78,26 @@ exports.login = (req, res, next) => {
   })
   .catch(function(err){
     return res.status(500).json({'error' : 'unable to verify user'})
+  })
+}
+
+exports.getUserProfile = (req, res, next) => {
+  var headerAuth = req.headers['authorization'];
+  var utilisateursId = jwtUtils.getUserId(headerAuth);
+
+  if (utilisateursId < 0)
+  return res.status(400).json({'error' : 'faux token'})
+
+  models.utilisateurs.findOne({
+    attributes: ['id', 'login'],
+    where: {id: utilisateursId}
+  }).then(function(user){
+    if (user) {
+      res.status(201).json(user);
+    } else {
+      res.status(404).json({"error" : "utilisateur introuvable"})
+    }
+  }).catch(function(err) {
+    res.status(500).json({'error' : "impossible de récupérer l'utilisateur"})
   })
 }

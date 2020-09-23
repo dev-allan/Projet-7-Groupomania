@@ -1,18 +1,29 @@
-const jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
+const JWT_SIGN_SECRET = "lerflrdnslnlkfcjJiugivjhB5962650dlkjk88";
 
-module.exports = (req, res, next) => {
-  try {
-    const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token, 'my_secret_key');
-    const userId = decodedToken.userId;
-    if (req.body.userId && req.body.userId !== userId) {
-      throw 'Invalid user ID';
-    } else {
-      next();
+module.exports = {
+    generateTokenForUser : function(userData){
+        return jwt.sign({
+            utilisateursId: userData.id
+        },
+        JWT_SIGN_SECRET,
+        {
+            expiresIn: '24h'
+        })
+    },
+    parseAuthorization: function(authorization) {
+      return (authorization != null) ? authorization.replace('Bearer ', '') : null;
+    },
+    getUserId: function(authorization){
+      var utilisateursId = -1;
+      var token = module.exports.parseAuthorization(authorization);
+      if(token != null){
+        try {
+          var jwtToken = jwt.verify(token, JWT_SIGN_SECRET);
+          if(jwtToken != null)
+            utilisateursId = jwtToken.utilisateursId;
+        } catch(err) {}
+      }
+      return utilisateursId;
     }
-  } catch {
-    res.status(401).json({
-      error: new Error('Invalid request!')
-    });
-  }
-};
+}
