@@ -1,22 +1,36 @@
 let mysqlConnection = require('../connection');
-let models = require('../models/articles');
-let jwtUtils = require('../middleware/auth')
+let models = require('../models/');
+let jwtUtils = require('../middleware/auth');
 
 exports.getAllArticles = (req, res, next)=>{
-    mysqlConnection.query("SELECT * FROM articles", (err, rows, fields)=>{
-        if(!err)
-            {
-                res.send(rows);
-            }
-        else
-            {
-                console.log(err);
-            }
-    })
+    var headerAuth = req.headers['authorization'];
+    var utilisateursId = jwtUtils.getUserId(headerAuth);
+
+    models.utilisateurs.findOne({
+        attributes: ['id', 'login'],
+        where: {id: utilisateursId}
+      }).then(function(user){
+        if (user) {
+          mysqlConnection.query("SELECT * FROM articles", (err, rows, fields)=>{
+            if(!err)
+                {
+                    res.send(rows);
+                }
+            else
+                {
+                    console.log(err);
+                }
+        })
+        } else {
+          res.status(404).json({"error" : "utilisateur introuvable"})
+        }
+      }).catch(function(err) {
+        res.status(500).json({'error' : "impossible de récupérer l'utilisateur"})
+      })
 }
 
 exports.getOneArticle = (req, res, next)=>{
-    var id = "1"
+    var id = req.params.id
     var data = [id]
     mysqlConnection.query('SELECT * FROM articles WHERE id =?',data, (err, rows, fields)=>{
         if(!err)
@@ -47,27 +61,26 @@ exports.sendArticles = (req, res, next)=>{
 }
 
 exports.deleteArticles = (req, res, next)=>{
-    var id = ""
+    var id = req.params.id
     var data = [id]
-    mysqlConnection.query('DELETE FROM articles WHERE id=?', data, (err,rows, fields)=>{
+    mysqlConnection.query('DELETE FROM articles WHERE id = ?',[data], (err,rows, fields)=>{
         if(!err)
         {
             res.send(rows);
         }
-        else
-        {
+        else{
             console.log(err);
         }  
     })
 }
 
 exports.modifyArticles = (req, res, next)=>{
-    var titre = ""
-    var contenu = ""
-    var court = ""
-    var id = ""
+    var titre = req.body.title
+    var contenu = req.body.content
+    var court = req.body.smallContent
+    var id = req.body.id
     var data = [titre, contenu,court, id]
-    mysqlConnection.query('UPDATE articles SET titre=?, contenu=?, court=? WHERE id=?', data, (err, rows, fields)=> {
+    mysqlConnection.query('UPDATE articles SET titre=?, contenu=?, court=?, updatedAt =NOW() WHERE id=?', data, (err, rows, fields)=> {
         if(!err)
         {
             res.send(rows);
