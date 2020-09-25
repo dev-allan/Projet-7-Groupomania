@@ -1,4 +1,4 @@
-let vm = new Vue({
+var vn = new Vue({
     el: "#authentification",
     data:{
         formulaire__inscription: false,
@@ -7,15 +7,14 @@ let vm = new Vue({
     methods: {
         
         formulaire_authentification: () => {
-            document.querySelector('form').innerHTML+=`<div class="form-group">
-            <label for="exampleInputEmail1">Votre email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="azerty@mail.com" placeholder="azerty@mail.com">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Votre mot de passe</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Votre mot de passe">
-          </div>
-          <button type="submit" class="btn btn-dark">Se connecter</button>`
+        let submitFormLogin = document.getElementById('login');
+
+          submitFormLogin.addEventListener('click', function(Event){
+            Event.preventDefault();
+            document.location.href="index.html"
+          });
         },
     }
 })
+
+vn.formulaire_authentification();
