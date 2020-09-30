@@ -31,9 +31,17 @@
                     }
                 }
                 fetch('http://localhost:3000/utilisateurs/login', options)
-                    .then(res => res.json(),)
-                    .then(res => localStorage.setItem('token', res.token),
-                        window.location.href = "/")
+                    .then(function(response){
+                        if (response.ok){
+                            response.json().then(function(response){
+                                console.log(response.token),
+                                localStorage.setItem('token', response.token)
+                                window.location.href = "/"
+                            })
+                        }else {
+                            alert('Vérifier vos identifiants')
+                        }
+                    })
             }
         }
 
