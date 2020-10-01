@@ -5,30 +5,42 @@
       Ecrivez et partagez vos articles pour partager vos passions.
     </p>
     <h3>Les derniers articles publiés par vos collègues</h3>
-    <div id="newArticle">
-    
-
-    </div>
+    <button v-on:click='showArticle'>Montrer les articles</button>
+    <ul>
+        <li v-for="post in posts" v-bind:key="post">{{ post }}</li>
+    </ul>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
   },
-}
+  // el: "#app",
+  data(){
+    return {
+      posts: [''],
+    }
+  },
+  methods: {
+    showArticle(){
+      axios.get('http://localhost:3000/articles/', {
+        headers : {
+          'Authorization' : localStorage.getItem('accessToken')
+        }
+      })
+      .then(res => this.posts = res.data)
+      .catch((error) => {
+        console.error(error)
+      })
+    }
+  }
+};
 
-// const insertNewArticle = document.getElementById('newArticle')
-fetch("http://localhost:3000/articles/")
-.then(function(response) {
-  response.text().then(function(text) {
-    // renderHTML(JSON.parse(text));
-    console.log(text)
-    });
-})
-.catch(error => alert("Erreur : " + error));
+
 
 
 </script>
