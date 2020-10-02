@@ -5,9 +5,9 @@
       Ecrivez et partagez vos articles pour partager vos passions.
     </p>
     <h3>Les derniers articles publiés par vos collègues</h3>
-    <button v-on:click='showArticle'>Montrer les articles</button>
+    <!-- <button v-on:click='showArticle'>Montrer les articles</button> -->
     <ul>
-        <li v-for="post in posts" v-bind:key="post">{{ post }}</li>
+        <li v-for="post in posts" v-bind:key="post">{{ posts[0].titre }} {{ posts[0].court }} <a href="">Lire la suite</a></li>
     </ul>
   </div>
 </template>
@@ -19,7 +19,6 @@ export default {
   props: {
     msg: String
   },
-  // el: "#app",
   data(){
     return {
       posts: [''],
@@ -37,7 +36,10 @@ export default {
         console.error(error)
       })
     }
-  }
+  },
+    beforeMount() {
+        this.showArticle();
+      },
 };
 
 
