@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="groupomania logo" src="../assets/logo.png">
+    <!-- <img alt="groupomania logo" src="../assets/logo.png"> -->
     <HelloWorld msg="Bienvenue sur GROUPOMANIA"/>
   </div>
 </template>

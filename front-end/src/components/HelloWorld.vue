@@ -7,7 +7,7 @@
     <h3>Les derniers articles publiés par vos collègues</h3>
     <!-- <button v-on:click='showArticle'>Montrer les articles</button> -->
     <ul>
-        <li v-for="post in posts" v-bind:key="post">{{ post.titre }} {{ post.court }} <a href="">Lire la suite</a></li>
+        <li v-for="post in posts" v-bind:key="post"><h4>{{ post.titre }}</h4> <p>{{ post.court }} <a :href=" '#/article?id=' + post.id" >Lire la suite</a></p></li>
     </ul>
   </div>
 </template>
@@ -39,7 +39,7 @@ export default {
   },
     beforeMount() {
         this.showArticle();
-      },
+    },
 };
 
 

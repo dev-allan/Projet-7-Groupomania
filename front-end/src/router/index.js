@@ -24,10 +24,15 @@ const routes = [
     component: () => import(/*login*/ '../views/Login.vue')
   },
   {
-    path : '/profil',
-    name: 'Profil',
-    component: () => import(/*Profil user*/ '../views/Profil.vue')
+    path : '/multimedia',
+    name: 'multimedia',
+    component: () => import(/*Profil user*/ '../views/multimedia.vue')
   },
+  {
+    path : "/article",
+    name : 'article',
+    component: () => import(/*get one article*/ '../views/article.vue')
+  }
 ]
 
 const router = new VueRouter({
