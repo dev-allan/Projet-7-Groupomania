@@ -101,3 +101,30 @@ exports.getUserProfile = (req, res, next) => {
     res.status(500).json({'error' : "impossible de récupérer l'utilisateur"})
   })
 }
+
+exports.deleteAccount = (req, res, next) => {
+  var headerAuth = req.headers['authorization'];
+  var utilisateursId = jwtUtils.getUserId(headerAuth);
+
+  models.utilisateurs.findOne({
+      attributes : ['id', 'login'],
+      where: {id: utilisateursId}
+  }).then(function(user){
+      if (user) {
+        var id = req.body.id
+        var data = [id]
+        mysqlConnection.query('DELETE FROM utilisateurs WHERE id=?', data, (err,rows, fields) => {
+          if(!err){
+            res.send(rows);
+          }
+          else{
+            console.log(err)
+          }
+        })
+      }else {
+        res.status(404).json({"error" : "utilisateur introuvable"})
+      }
+  }).catch(function(err){
+    res.status(500).json({'error' : "impossible de récupérer l'utilisateur"})
+  })
+}
