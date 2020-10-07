@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       contenu: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       court: {
         type: Sequelize.STRING
