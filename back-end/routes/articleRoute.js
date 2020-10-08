@@ -7,7 +7,8 @@ router.get('/', articleCtrl.getAllArticles);
 router.get('/:id', articleCtrl.getOneArticle);
 router.post('/send', articleCtrl.sendArticles);
 router.delete('/:id', articleCtrl.deleteArticles);
-router.put('/update', articleCtrl.modifyArticles);
+router.put('/update', articleCtrl.modifyArticlesFromModerator);
+router.delete('/moderator/:id', articleCtrl.deleteArticlesFromModerator);
 
 
 

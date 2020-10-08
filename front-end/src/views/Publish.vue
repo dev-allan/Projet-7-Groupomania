@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 export default {
   data(){
     return {
@@ -22,7 +23,10 @@ export default {
   },
   methods: {
     sendArticle(){
+      var token = localStorage.getItem('accessToken');
+      var decoded = jwt_decode(token);
       var body = {
+        pseudo : decoded.utilisateursId,
         title : this.titre,
         content : this.contenu,
         smallContent : this.court,

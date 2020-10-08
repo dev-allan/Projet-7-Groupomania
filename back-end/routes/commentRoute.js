@@ -7,5 +7,7 @@ router.get('/', commentCtrl.getAllCommentsFromArticles);
 router.get('/comment', commentCtrl.getCommentFromArticle);
 router.post('/send', commentCtrl.sendComment);
 router.delete('/:id', commentCtrl.deleteComment);
+router.delete('/moderator/:id', commentCtrl.deleteCommentFromModerator);
+router.put('/moderator/modify', commentCtrl.modifyCommentFromModerator);
 
 module.exports = router;

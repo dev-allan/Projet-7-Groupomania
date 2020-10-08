@@ -67,11 +67,12 @@ exports.sendArticles = (req, res, next)=>{
         where: {id: utilisateursId}
     }).then(function(user){
         if (user) {
+            var pseudo = req.body.pseudo
             var titre = req.body.title
             var contenu = req.body.content
             var court = req.body.smallContent
-            var data = [titre, contenu, court]
-            mysqlConnection.query('INSERT INTO articles SET titre =?, contenu =?, court =?, createdAt =NOW(), updatedAt =NOW()',data, (err, articles, fields) => {
+            var data = [pseudo, titre, contenu, court]
+            mysqlConnection.query('INSERT INTO articles SET pseudo =?, titre =?, contenu =?, court =?, createdAt =NOW(), updatedAt =NOW()',data, (err, articles, fields) => {
                 if (!err) {
                     res.send(articles);
                 }
@@ -98,8 +99,9 @@ exports.deleteArticles = (req, res, next)=>{
       }).then(function(user){
         if (user) {
             var id = req.params.id
-            var data = [id]
-            mysqlConnection.query('DELETE FROM articles WHERE id = ?',[data], (err,rows, fields)=>{
+            var pseudo = jwtUtils.getUserId(headerAuth)
+            var data = [id, pseudo]
+            mysqlConnection.query('DELETE FROM articles WHERE id =? AND pseudo =?',data, (err,rows, fields)=>{
                 if(!err)
                 {
                     res.send(rows);
@@ -117,13 +119,14 @@ exports.deleteArticles = (req, res, next)=>{
 
 }
 
-exports.modifyArticles = (req, res, next)=>{
+exports.modifyArticlesFromModerator = (req, res, next)=>{
     var headerAuth = req.headers['authorization'];
     var utilisateursId = jwtUtils.getUserId(headerAuth);
 
     models.utilisateurs.findOne({
-        attributes: ['id', 'login'],
-        where: {id: utilisateursId}
+        attributes: ['id', 'login', 'permission'],
+        where: {id: utilisateursId,
+                permission : permission = 'Moderator'}
       }).then(function(user){
         if (user) {
             var titre = req.body.title
@@ -142,9 +145,39 @@ exports.modifyArticles = (req, res, next)=>{
                 }         
             })
         } else {
-          res.status(404).json({"error" : "utilisateur introuvable"})
+          res.status(404).json({"error" : "L'utilisateur n'a pas les privilèges requis"})
         }
       }).catch(function(err) {
         res.status(500).json({'error' : "impossible de récupérer l'utilisateur"})
       })
+}
+
+exports.deleteArticlesFromModerator = (req, res, next)=>{
+    var headerAuth = req.headers['authorization'];
+    var utilisateursId = jwtUtils.getUserId(headerAuth);
+
+    models.utilisateurs.findOne({
+        attributes: ['id', 'login', 'permission'],
+        where: {id: utilisateursId,
+                permission : permission = 'Moderator'}
+      }).then(function(user){
+        if (user) {
+            var id = req.params.id
+            var data = [id]
+            mysqlConnection.query('DELETE FROM articles WHERE id = ?',[data], (err,rows, fields)=>{
+                if(!err)
+                {
+                    res.send(rows);
+                }
+                else{
+                    console.log(err);
+                }  
+            })
+        } else {
+          res.status(404).json({"error" : "l'utilisateur n'a pas les privilèges requis"})
+        }
+      }).catch(function(err) {
+        res.status(500).json({'error' : "impossible de récupérer l'utilisateur"})
+      })
+
 }

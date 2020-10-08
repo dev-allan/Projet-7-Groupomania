@@ -82,7 +82,37 @@ exports.deleteComment = (req, res, next) => {
       }).then(function(user){
         if (user) {
             var id = req.params.id
-            var data = [id]
+            var pseudo = jwtUtils.getUserId(headerAuth)
+            var data = [id, pseudo]
+            mysqlConnection.query('DELETE FROM commentaires WHERE id=? AND pseudo=?', data, (err,rows, fields) => {
+                if (!err) {
+                    res.send(rows);
+                }
+        
+                else {
+                    console.log(err);
+                }
+            })
+        } else {
+          res.status(404).json({"error" : "utilisateur introuvable"})
+        }
+      }).catch(function(err) {
+        res.status(500).json({'error' : "impossible de récupérer l'utilisateur"})
+      })
+}
+
+exports.deleteCommentFromModerator = (req, res, next) => {
+    var headerAuth = req.headers['authorization'];
+    var utilisateursId = jwtUtils.getUserId(headerAuth);
+
+    models.utilisateurs.findOne({
+        attributes: ['id', 'login', 'permission'],
+        where: {id: utilisateursId,
+                permission : permission = 'Moderator'}
+      }).then(function(user){
+        if (user) {
+            var id = req.params.id
+            var data = [id, pseudo]
             mysqlConnection.query('DELETE FROM commentaires WHERE id=?', data, (err,rows, fields) => {
                 if (!err) {
                     res.send(rows);
@@ -94,6 +124,37 @@ exports.deleteComment = (req, res, next) => {
             })
         } else {
           res.status(404).json({"error" : "utilisateur introuvable"})
+        }
+      }).catch(function(err) {
+        res.status(500).json({'error' : "impossible de récupérer l'utilisateur"})
+      })
+}
+
+exports.modifyCommentFromModerator = (req, res, next)=>{
+    var headerAuth = req.headers['authorization'];
+    var utilisateursId = jwtUtils.getUserId(headerAuth);
+
+    models.utilisateurs.findOne({
+        attributes: ['id', 'login', 'permission'],
+        where: {id: utilisateursId,
+                permission : permission = 'Moderator'}
+      }).then(function(user){
+        if (user) {
+            var contenu_commentaire = req.body.comment
+            var id = req.body.id
+            var data = [contenu_commentaire, id]
+            mysqlConnection.query('UPDATE commentaires SET contenu_commentaire=?, updatedAt =NOW() WHERE id=?', data, (err, rows, fields)=> {
+                if(!err)
+                {
+                    res.send(rows);
+                }
+                else
+                {
+                    console.log(err);
+                }         
+            })
+        } else {
+          res.status(404).json({"error" : "L'utilisateur n'a pas les privilèges requis"})
         }
       }).catch(function(err) {
         res.status(500).json({'error' : "impossible de récupérer l'utilisateur"})
