@@ -24,7 +24,7 @@ exports.getCommentFromArticle = (req, res, next) => {
         where: {id: utilisateursId}
     }).then(function(user){
         if (user) {
-            var articles_Id = req.body.articles_Id
+            var articles_Id = req.params.id
             var data = [articles_Id]
             mysqlConnection.query('SELECT login, contenu_commentaire FROM utilisateurs INNER JOIN commentaires ON commentaires.pseudo = utilisateurs.id WHERE articles_id = ?', data, (err,rows, fields) => {
                 if (!err){
