@@ -51,11 +51,11 @@ exports.sendComment = (req, res, next) => {
         where: {id: utilisateursId}
       }).then(function(user){
         if (user) {
-            var pseudo = req.body.utilisateur_Id
+            var pseudo = utilisateursId
             var contenu_commentaire = req.body.comment
             var articles_Id = req.body.articles_Id
             var data = [pseudo, contenu_commentaire, articles_Id]
-            mysqlConnection.query('INSERT INTO commentaires SET pseudo=?, contenu_commentaire=?, articles_id=?, createdAt = NOW(), updatedAt = NOW()', data, (err, rows, fields) => {
+            mysqlConnection.query("INSERT INTO commentaires SET pseudo=?, contenu_commentaire=?, articles_id=?, createdAt = NOW(), updatedAt = NOW()", data, (err, rows, fields) => {
                 if (!err) {
                     res.send(rows);
                 }

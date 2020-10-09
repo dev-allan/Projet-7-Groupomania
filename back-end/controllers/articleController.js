@@ -11,7 +11,7 @@ exports.getAllArticles = (req, res, next)=>{
         where: {id: utilisateursId}
       }).then(function(user){
         if (user) {
-          mysqlConnection.query("SELECT * FROM articles", (err, rows, fields)=>{
+          mysqlConnection.query("SELECT login, titre, contenu, court FROM utilisateurs INNER JOIN articles ON articles.pseudo = utilisateurs.id", (err, rows, fields)=>{
             if(!err)
                 {
                     res.send(rows);
@@ -40,7 +40,7 @@ exports.getOneArticle = (req, res, next)=>{
         if (user) {
         var id = req.params.id
         var data = [id]
-        mysqlConnection.query('SELECT * FROM articles WHERE id =?',data, (err, rows, fields)=>{
+        mysqlConnection.query('SELECT login, titre, contenu, court FROM utilisateurs INNER JOIN articles ON articles.pseudo = utilisateurs.id WHERE articles.id =?',data, (err, rows, fields)=>{
             if(!err)
                 {
                     res.send(rows);
@@ -67,7 +67,7 @@ exports.sendArticles = (req, res, next)=>{
         where: {id: utilisateursId}
     }).then(function(user){
         if (user) {
-            var pseudo = req.body.pseudo
+            var pseudo = utilisateursId
             var titre = req.body.title
             var contenu = req.body.content
             var court = req.body.smallContent
