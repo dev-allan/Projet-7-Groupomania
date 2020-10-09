@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/accueil">Accueil</router-link> |
-      <router-link to="/about">Publier</router-link> |
+      <router-link to="/publish">Publier</router-link> |
+      <router-link to="profil">Profil</router-link> |
       <router-link to="/multimedia">Multimedia</router-link> |
       <router-link to="/">Se connecter</router-link> |
       <router-link to="">Se déconnecter</router-link> |
