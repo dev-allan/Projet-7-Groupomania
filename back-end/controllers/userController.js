@@ -111,9 +111,9 @@ exports.deleteAccount = (req, res, next) => {
       where: {id: utilisateursId}
   }).then(function(user){
       if (user) {
-        var id = req.body.id
+        var id = utilisateursId
         var data = [id]
-        mysqlConnection.query('DELETE FROM utilisateurs WHERE id=?', data, (err,rows, fields) => {
+        mysqlConnection.query('SET FOREIGN_KEY_CHECKS=OFF; DELETE FROM utilisateurs WHERE id=?; SET FOREIGN_KEY_CHECKS=ON;', data, (err,rows, fields) => {
           if(!err){
             res.send(rows);
           }
