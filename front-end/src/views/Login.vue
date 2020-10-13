@@ -44,7 +44,7 @@
                             response.json().then(function(response){
                                 console.log(response.token),
                                 localStorage.setItem('accessToken', response.token)
-                                window.location.href = "/accueil"
+                                window.location.href = "#/accueil"
                             })
                         }else {
                             alert('Vérifier vos identifiants')
@@ -83,7 +83,7 @@
     }
 </script>
 
-<style scoped>
+<style lang='scss'>
     #login {
         width: 500px;
         border: 1px solid #CCCCCC;
