@@ -89,7 +89,7 @@ exports.getUserProfile = (req, res, next) => {
   return res.status(400).json({'error' : 'faux token'})
 
   models.utilisateurs.findOne({
-    attributes: ['id', 'login'],
+    attributes: ['id', 'login','permission'],
     where: {id: utilisateursId}
   }).then(function(user){
     if (user) {

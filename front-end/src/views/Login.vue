@@ -44,7 +44,7 @@
                             response.json().then(function(response){
                                 console.log(response.token),
                                 localStorage.setItem('accessToken', response.token)
-                                window.location.href = "#/accueil"
+                                document.location.href = "/accueil/#accueil"
                             })
                         }else {
                             alert('Vérifier vos identifiants')
