@@ -3,14 +3,14 @@
         <div class="moderation-article">
             <h4>Modération des articles</h4>
                 <ul>
-                    <li v-for="post in posts" v-bind:key="post"><h4>{{ post.titre }}</h4> <p>{{ post.court }}</p><p>par {{ post.login }}</p><button v-on:click="deleteArticle(post.id)">Supprimer</button><button v-on:click="boutonEditArticle(post.id)">Editer</button></li>
+                    <li v-for="post in posts" v-bind:key="post"><h4>{{ post.titre }}</h4> <p>{{ post.court }}</p><p>par {{ post.login }}</p><b-button variant="danger" v-on:click="deleteArticle(post.id)">Supprimer</b-button> <b-button v-on:click="boutonEditArticle(post.id)">Editer</b-button></li>
                 </ul>
         </div>
         <div class="moderation-commentaire">
             <h4>Modération des commentaires</h4>
-            <ul>
-              <li v-for="comment in comments" v-bind:key="comment"><p>{{ comment.login }}</p><p>{{ comment.contenu_commentaire }}</p><button v-on:click="deleteComment(comment.id)">Supprimer</button> <button v-on:click="boutonEditComment(comment.id)">Editer</button></li>
-            </ul>
+              <ul>
+                <li v-for="comment in comments" v-bind:key="comment"><p>{{ comment.login }}</p><p>{{ comment.contenu_commentaire }}</p><b-button variant="danger" v-on:click="deleteComment(comment.id)">Supprimer</b-button> <b-button v-on:click="boutonEditComment(comment.id)">Editer</b-button></li>
+              </ul>
         </div>
     </div>
 </template>

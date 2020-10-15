@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-    <div id="nav" v-if="profils.id > 0">
-      <router-link to="/accueil">Accueil</router-link> |
-      <router-link to="/publish">Publier</router-link> |
-      <router-link to="profil">Profil</router-link> |
-      <router-link to="/multimedia">Multimedia</router-link> |
-      <router-link v-if="profils.permission === 'Moderator'" to="/moderator">Moderation</router-link>
-      <!-- <router-link to="/">Se connecter</router-link> | -->
-    </div>
+    <b-navbar type="dark" variant="dark" id="nav" v-if="profils.id > 0">
+      <b-navbar-nav>
+        <b-nav-item to="/accueil">Accueil</b-nav-item>
+        <b-nav-item to="/publish">Publier</b-nav-item>
+        <b-nav-item to="profil">Profil</b-nav-item>
+        <b-nav-item to="/multimedia">Multimedia</b-nav-item>
+        <b-nav-item v-if="profils.permission === 'Moderator'" to="/moderator">Moderation</b-nav-item>
+      </b-navbar-nav>
+    </b-navbar>
     <router-view/>
   </div>
 </template>
