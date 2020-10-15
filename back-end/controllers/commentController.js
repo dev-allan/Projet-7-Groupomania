@@ -108,11 +108,11 @@ exports.deleteCommentFromModerator = (req, res, next) => {
     models.utilisateurs.findOne({
         attributes: ['id', 'login', 'permission'],
         where: {id: utilisateursId,
-                permission : permission = 'Moderator'}
+                permission: permission = 'Moderator'}
       }).then(function(user){
         if (user) {
             var id = req.params.id
-            var data = [id, pseudo]
+            var data = [id]
             mysqlConnection.query('DELETE FROM commentaires WHERE id=?', data, (err,rows, fields) => {
                 if (!err) {
                     res.send(rows);
@@ -159,4 +159,29 @@ exports.modifyCommentFromModerator = (req, res, next)=>{
       }).catch(function(err) {
         res.status(500).json({'error' : "impossible de récupérer l'utilisateur"})
       })
+}
+
+exports.getAllComments = (req, res, next) => {
+    var headerAuth = req.headers['authorization'];
+    var utilisateursId = jwtUtils.getUserId(headerAuth);
+
+    models.utilisateurs.findOne({
+        attributes : ['id', 'login'],
+        where: {id: utilisateursId}
+    }).then(function(user){
+        if (user) {
+            mysqlConnection.query('SELECT commentaires.id, login, contenu_commentaire FROM utilisateurs INNER JOIN commentaires ON commentaires.pseudo = utilisateurs.id', (err,rows, fields) => {
+                if (!err){
+                    res.send(rows);
+                }
+                else {
+                    console.log(err)
+                }
+            })
+        } else {
+            res.status(404).json({"error" : "utilisateur introuvable"})
+        }
+    }).catch(function(err) {
+        res.status(500).json({'error' : "impossible de récupérer l'utilisateur"})
+    })
 }

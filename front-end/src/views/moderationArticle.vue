@@ -32,6 +32,7 @@ export default {
     },
 
     submitModification(){
+        document.location.reload(true);
         var body = {
             title : document.forms[0][0].value,
             smallContent : document.forms[0][1].value,
