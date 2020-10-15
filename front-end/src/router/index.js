@@ -43,6 +43,11 @@ const routes = [
     path : "/moderator",
     name : 'moderator',
     component: () => import(/*get one article*/ '../views/moderation.vue')
+  },
+  {
+    path: '/moderator/article',
+    name : 'modifyArticleByModerator',
+    component: () => import(/*modify article*/ "../views/moderationArticle.vue")
   }
 ]
 
