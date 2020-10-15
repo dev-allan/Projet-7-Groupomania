@@ -8,6 +8,7 @@ router.get('/all', commentCtrl.getAllComments);
 router.get('/comment/:id', commentCtrl.getCommentFromArticle);
 router.post('/send', commentCtrl.sendComment);
 router.delete('/:id', commentCtrl.deleteComment);
+router.get('/moderator/:id', commentCtrl.getOneComment);
 router.delete('/moderator/:id', commentCtrl.deleteCommentFromModerator);
 router.put('/moderator/modify', commentCtrl.modifyCommentFromModerator);
 

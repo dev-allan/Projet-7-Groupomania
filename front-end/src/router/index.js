@@ -48,7 +48,12 @@ const routes = [
     path: '/moderator/article',
     name : 'modifyArticleByModerator',
     component: () => import(/*modify article*/ "../views/moderationArticle.vue")
-  }
+  },
+  {
+    path: '/moderator/comment',
+    name: 'modifyCommentByModerator',
+    component: () => import(/*modify comment*/ "../views/moderationComment.vue")
+  },
 ]
 
 const router = new VueRouter({

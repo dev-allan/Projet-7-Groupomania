@@ -3,13 +3,13 @@
         <div class="moderation-article">
             <h4>Modération des articles</h4>
                 <ul>
-                    <li v-for="post in posts" v-bind:key="post"><h4>{{ post.titre }}</h4> <p>{{ post.court }} <a :href=" '#/moderator/article?id=' + post.id" >Modifier cet article</a></p><p>par {{ post.login }}</p><button v-on:click="deleteArticle(post.id)">Supprimer</button></li>
+                    <li v-for="post in posts" v-bind:key="post"><h4>{{ post.titre }}</h4> <p>{{ post.court }}</p><p>par {{ post.login }}</p><button v-on:click="deleteArticle(post.id)">Supprimer</button><button v-on:click="boutonEditArticle(post.id)">Editer</button></li>
                 </ul>
         </div>
         <div class="moderation-commentaire">
             <h4>Modération des commentaires</h4>
             <ul>
-              <li v-for="comment in comments" v-bind:key="comment"><p>{{ comment.id }}</p><p>{{ comment.login }}</p><p>{{ comment.contenu_commentaire }}</p><button v-on:click="deleteComment(comment.id)">Supprimer</button> <button>Editer</button></li>
+              <li v-for="comment in comments" v-bind:key="comment"><p>{{ comment.login }}</p><p>{{ comment.contenu_commentaire }}</p><button v-on:click="deleteComment(comment.id)">Supprimer</button> <button v-on:click="boutonEditComment(comment.id)">Editer</button></li>
             </ul>
         </div>
     </div>
@@ -46,6 +46,12 @@ export default {
       .catch((error) => {
         console.error(error)
       })
+    },
+    boutonEditArticle(id){
+      document.location.href="#/moderator/article?id=" +id;
+    },
+    boutonEditComment(id){
+      document.location.href="#/moderator/comment?id="+id;
     },
     deleteComment(id){
       axios.delete('http://localhost:3000/commentaires/moderator/' + id,{
