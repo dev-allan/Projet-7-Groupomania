@@ -1,7 +1,6 @@
 <template>
-  <div class="home">
-    <!-- <img alt="groupomania logo" src="../assets/logo.png"> -->
-    <HelloWorld msg="Bienvenue sur GROUPOMANIA"/>
+  <div class="home, flex-column, col-md-10 ml-auto mr-auto mt-3">
+    <HelloWorld msg="Bienvenue sur"/>
   </div>
 </template>
 

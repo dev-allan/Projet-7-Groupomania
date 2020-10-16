@@ -11,7 +11,7 @@ exports.getAllArticles = (req, res, next)=>{
         where: {id: utilisateursId}
       }).then(function(user){
         if (user) {
-          mysqlConnection.query("SELECT login, titre, contenu, court, articles.id FROM utilisateurs INNER JOIN articles ON articles.pseudo = utilisateurs.id", (err, rows, fields)=>{
+          mysqlConnection.query("SELECT login, titre, contenu, court, articles.id FROM utilisateurs INNER JOIN articles ON articles.pseudo = utilisateurs.id ORDER BY articles.createdAt DESC", (err, rows, fields)=>{
             if(!err)
                 {
                     res.send(rows);

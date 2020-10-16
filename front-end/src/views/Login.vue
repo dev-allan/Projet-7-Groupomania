@@ -1,17 +1,40 @@
 <template>
-    <div class="login">
-        <h1>Se connecter</h1>
-        <form @submit.prevent="submitLogin">
-            <input type="email" name="email" placeholder="Email" v-model="email"/>
-            <input type="password" name="password"  placeholder="Password" v-model="password" />
-            <button type="submit">Login</button>
-        </form>
-        <h1>Créer un compte</h1>
-        <form @submit.prevent="submitSignup">
-            <input type="email" name="email" placeholder="Email" v-model="login"/>
-            <input type="password" name="password"  placeholder="Password" v-model="createPassword" />
-            <button type="submit">Créer mon compte</button>
-        </form>
+    <div class="login, flex-column, col-md-6 ml-auto mr-auto mt-3">
+        <div class="d-flex justify-content-center">
+            <img src="../assets/logo-black.svg" alt="logo de groupomania"/>
+        </div>
+        <b-form @submit.prevent="submitLogin" class="center-block, mt-5">
+            <div class="col-sm-12">
+                <h3>Se connecter</h3>
+            </div>
+            <div class="col-sm-12">
+                <label for="email">Votre adresse email</label>
+                <b-form-input class="shadow-sm p-3 mb-5 bg-white rounded" type="email" name="email" placeholder="azerty@email.com" v-model="email"/>
+            </div>
+            <div class="col-sm-12">
+                <label for="password">Votre mot de passe</label>
+                <b-form-input class="shadow-sm p-3 mb-5 bg-white rounded" type="password" name="password"  placeholder="Tapez votre mot de passe" v-model="password" />
+             </div>
+             <div class="col-sm-12">
+                <b-button type="submit" variant="primary">Se connecter</b-button>
+            </div>
+        </b-form><br>
+        <b-form @submit.prevent="submitSignup" class="center-block, mt-5">
+            <div class="col-sm-12">
+                <h3>Créer un compte</h3>
+            </div>
+            <div class="col-sm-12">
+                <label for="email">Votre adresse email</label>
+                <b-form-input class="shadow-sm p-3 mb-5 bg-white rounded" type="email" name="email" placeholder="azerty@email.com" v-model="login"/>
+            </div>
+            <div class="col-sm-12">
+                <label for="password">Votre mot de passe</label>
+                <b-form-input class="shadow-sm p-3 mb-5 bg-white rounded" type="password" name="password"  placeholder="Tapez votre mot de passe" v-model="createPassword" />
+            </div>
+            <div class="col-sm-12">
+                <b-button type="submit" variant="primary">Créer mon compte</b-button>
+            </div>
+        </b-form>
     </div>
 </template>
 

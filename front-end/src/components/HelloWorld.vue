@@ -1,14 +1,16 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      Ecrivez et partagez vos articles pour partager vos passions.
+    <img  class="mb-3" alt="groupomania logo" src="../assets/logo-black.svg">
+    <p class="hello-bienvenue">
+      Vous souhaite la bienvenue !
     </p>
-    <h3>Les derniers articles publiés par vos collègues</h3>
-    <!-- <button v-on:click='showArticle'>Montrer les articles</button> -->
-    <ul>
-        <li v-for="post in posts" v-bind:key="post"><h4>{{ post.titre }}</h4> <p>{{ post.court }} <a :href=" '#/article?id=' + post.id" >Lire la suite</a></p><p>par {{ post.login }}</p></li>
-    </ul>
+    <div>
+      <h3 class="mb-3">Les derniers articles publiés par vos collègues</h3>
+      <!-- <button v-on:click='showArticle'>Montrer les articles</button> -->
+      <div>
+          <div class="card" v-for="post in posts" v-bind:key="post"><h4 class="card-title">{{ post.titre }}</h4> <p class="card-text">{{ post.court }} <a :href=" '#/article?id=' + post.id" >Lire la suite</a></p><p>par {{ post.login }}</p></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -46,6 +48,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+.hello{
+  .hello-bienvenue{
+    font-size: 30px;
+  }
+}
+
 h3 {
   margin: 40px 0 0;
 }

@@ -10,6 +10,11 @@
       </b-navbar-nav>
     </b-navbar>
     <router-view/>
+    <!-- Footer -->
+    <footer class="page-footer font-small bg-dark text-white py-4 mt-5">
+      <div class="footer-copyright text-center py-3">2020 Groupomania
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -45,5 +50,10 @@ export default {
 </script>
 
 <style lang="scss">
+
+footer {
+  display: flex;
+  justify-content: center;
+}
 
 </style>
