@@ -1,15 +1,18 @@
 <template>
-    <div class="articles">
+    <div class="articles flex-column col-md-8 ml-auto mr-auto mt-3">
         <div class="article">
           <h4 v-for="post in posts" v-bind:key="post">{{ post.titre }} </h4>
           <p v-for="post in posts" v-bind:key="post">{{ post.contenu }}</p>
         </div>
         <hr>
         <div class="comment"> 
-          <form @submit.prevent="submitComment">
-              <input type="text" name="comment" placeholder="Ecrivez votre commentaire" v-model="comment"/>
-              <button type="submit">Envoyer le commentaire</button>
-          </form>
+          <b-form @submit.prevent="submitComment" class="center-block">
+            <div class="form-group md-form">
+              <label for="comment">Commentez cet article</label>
+              <textarea class="md-textarea form-control" rows="5" type="text" name="comment" id="comment" v-model="comment">Ecrivez votre commentaire</textarea>
+            </div>
+              <b-button type="submit" variant="primary">Envoyer le commentaire</b-button>
+          </b-form>
         </div>
         <div class="showComment">
           <li v-for="comment in comments" v-bind:key="comment"><h5>{{ comment.login }}</h5><p>{{ comment.contenu_commentaire}}</p></li>
@@ -81,5 +84,10 @@ export default {
 li {
   display: inline-block;
   margin: 0 10px;
+}
+
+
+label{
+display: flex;
 }
 </style>

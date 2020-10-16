@@ -1,5 +1,5 @@
 <template>
-    <div class="login, flex-column, col-md-6 ml-auto mr-auto mt-3">
+    <div class="login flex-column col-md-6 ml-auto mr-auto mt-3">
         <div class="d-flex justify-content-center">
             <img src="../assets/logo-black.svg" alt="logo de groupomania"/>
         </div>
