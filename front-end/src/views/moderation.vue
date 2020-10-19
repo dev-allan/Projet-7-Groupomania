@@ -1,15 +1,24 @@
 <template>
-    <div class="moderation">
-        <div class="moderation-article">
+    <div class="moderation flex-column col-md-10 ml-auto mr-auto mt-3">
+        <div class="moderation-article mt-3">
             <h4>Modération des articles</h4>
-                <ul>
-                    <li v-for="post in posts" v-bind:key="post"><h4>{{ post.titre }}</h4> <p>{{ post.court }}</p><p>par {{ post.login }}</p><b-button variant="danger" v-on:click="deleteArticle(post.id)">Supprimer</b-button> <b-button v-on:click="boutonEditArticle(post.id)">Editer</b-button></li>
+                <ul class="moderation-article__card">
+                    <li class="card mt-3" v-for="post in posts" v-bind:key="post">
+                      <p class="card-body">Titre de l'article : {{ post.titre }}</p> 
+                      <p class="card-body">Contenu en une : {{ post.court }}</p>
+                      <p class="card-body">par : {{ post.login }}</p>
+                      <b-button variant="danger" v-on:click="deleteArticle(post.id)">Supprimer</b-button> 
+                      <b-button v-on:click="boutonEditArticle(post.id)">Editer</b-button></li>
                 </ul>
         </div>
-        <div class="moderation-commentaire">
+        <div class="moderation-commentaire mt-3">
             <h4>Modération des commentaires</h4>
-              <ul>
-                <li v-for="comment in comments" v-bind:key="comment"><p>{{ comment.login }}</p><p>{{ comment.contenu_commentaire }}</p><b-button variant="danger" v-on:click="deleteComment(comment.id)">Supprimer</b-button> <b-button v-on:click="boutonEditComment(comment.id)">Editer</b-button></li>
+              <ul class="moderation-commentaire__card">
+                <li class="card mt-3" v-for="comment in comments" v-bind:key="comment">
+                    <p class="card-body">login : {{ comment.login }}</p><p class="card-body">Contenu : {{ comment.contenu_commentaire }}</p>
+                    <b-button variant="danger" v-on:click="deleteComment(comment.id)">Supprimer</b-button> 
+                    <b-button v-on:click="boutonEditComment(comment.id)">Editer</b-button>
+                </li>
               </ul>
         </div>
     </div>
@@ -87,3 +96,33 @@ export default {
 };
 
 </script>
+
+<style lang="scss">
+
+.moderation {
+  .moderation-article {
+    .moderation-article__card {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: center;
+      align-items: auto;
+      align-content: center
+    }
+  }
+}
+
+.moderation {
+  .moderation-commentaire {
+    .moderation-commentaire__card {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: center;
+      align-items: auto;
+      align-content: center
+    }
+  }
+}
+
+</style>

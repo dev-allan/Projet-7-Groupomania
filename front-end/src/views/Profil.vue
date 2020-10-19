@@ -1,10 +1,12 @@
 <template>
     <div class="profil">
-        <div class="yourProfil">
+        <div class="yourProfil flex-column col-md-8 ml-auto mr-auto mt-3">
             <h3>Votre profil</h3>
             <p>Login : {{ profils.login }}</p>
-            <p><button v-on:click="deleteAccount">Supprimer mon compte</button></p>
-            <p><button v-on:click="logout">Se déconnecter</button></p>
+            <div class="flex-row">
+              <p><b-button variant="danger" v-on:click="deleteAccount">Supprimer mon compte</b-button></p>
+              <p><b-button variant="warning" v-on:click="logout">Se déconnecter</b-button></p>
+            </div>
         </div>
     </div>
 </template>

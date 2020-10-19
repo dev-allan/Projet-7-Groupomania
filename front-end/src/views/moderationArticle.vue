@@ -1,12 +1,12 @@
 <template>
-    <div class="article-moderation">
-        <h1>Moderation article</h1>
-        <form @submit.prevent="submitModification">
-            <input type="text" name="title" v-for="post in posts" v-bind:key="post" v-model="post.titre"/>
-            <textarea type="text" name="content" v-for="post in posts" v-bind:key="post" v-model="post.contenu"></textarea>
-            <textarea type="text" name="smallContent" v-for="post in posts" v-bind:key="post" v-model="post.court"></textarea>
-            <button type="submit">Envoyer les modifications</button>
-        </form>
+    <div class="article-moderation flex-column col-md-8 ml-auto mr-auto mt-3">
+        <h3>Moderation article</h3>
+        <b-form @submit.prevent="submitModification">
+            <b-form-input type="text" name="title" v-for="post in posts" v-bind:key="post" v-model="post.titre"/>
+            <b-form-textarea class="mt-3" type="text" name="smallContent" v-for="post in posts" v-bind:key="post" v-model="post.court"></b-form-textarea>
+            <b-form-textarea class="mt-3" rows="15" type="text" name="content" v-for="post in posts" v-bind:key="post" v-model="post.contenu"></b-form-textarea>
+            <b-button class="mt-3" type="submit" variant="primary">Envoyer les modifications</b-button>
+        </b-form>
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar type="dark" variant="dark" id="nav" v-if="profils.id > 0">
+    <b-navbar class="navbar" type="dark" variant="dark" id="nav" v-if="profils.id > 0">
       <b-navbar-nav>
         <b-nav-item to="/accueil">Accueil</b-nav-item>
         <b-nav-item to="/publish">Publier</b-nav-item>
@@ -54,6 +54,15 @@ export default {
 footer {
   display: flex;
   justify-content: center;
+}
+
+.navbar {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
 }
 
 </style>

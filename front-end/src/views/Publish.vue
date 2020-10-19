@@ -1,12 +1,12 @@
 <template>
-  <div class="publish">
-    <h1>Publier votre article</h1>
-        <form @submit.prevent="sendArticle">
-            <input type="text" name="titre" placeholder="Titre de votre article" v-model="titre"/>
-            <textarea name="court" v-model="court">Ecrivez un résumé de votre article</textarea>
-            <textarea name="contenu" v-model="contenu">Ecrivez votre article</textarea>
-            <button type="submit">Publier votre article</button>
-        </form>
+  <div class="publish flex-column col-md-8 ml-auto mr-auto mt-3">
+    <h3>Ecrivez et publiez votre article</h3>
+        <b-form @submit.prevent="sendArticle">
+            <b-form-input type="text" name="titre" placeholder="Titre de votre article" v-model="titre"/>
+            <b-form-textarea class="mt-3" name="court" v-model="court" placeholder="Ecrivez un court texte pour donner envie aux utilisateurs de lire votre article"></b-form-textarea>
+            <b-form-textarea class="mt-3" rows="15" name="contenu" v-model="contenu" placeholder="Ecrivez votre article">Ecrivez votre article</b-form-textarea>
+            <b-button type="submit" class="mt-3" variant="primary">Publier votre article</b-button>
+        </b-form>
   </div>
 </template>
 

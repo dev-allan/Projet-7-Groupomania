@@ -1,10 +1,10 @@
 <template>
-    <div class="commentaire-moderation">
-        <h1>Moderation commentaire</h1>
-        <form @submit.prevent="submitModification">
-            <textarea type="text" name="comment" v-for="post in posts" v-bind:key="post" v-model="post.contenu_commentaire"></textarea>
-            <button type="submit">Envoyer les modifications</button>
-        </form>
+    <div class="commentaire-moderation flex-column col-md-8 ml-auto mr-auto mt-3">
+        <h3>Moderation commentaire</h3>
+        <b-form @submit.prevent="submitModification">
+            <b-textarea type="text" name="comment" row="7" v-for="post in posts" v-bind:key="post" v-model="post.contenu_commentaire"></b-textarea>
+            <b-button class="mt-3" type="submit" variant="primary">Envoyer les modifications</b-button>
+        </b-form>
     </div>  
 </template>
 

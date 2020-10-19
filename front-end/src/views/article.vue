@@ -14,9 +14,10 @@
               <b-button type="submit" variant="primary">Envoyer le commentaire</b-button>
           </b-form>
         </div>
-        <div class="showComment">
-          <li v-for="comment in comments" v-bind:key="comment"><h5>{{ comment.login }}</h5><p>{{ comment.contenu_commentaire}}</p></li>
-        </div>
+        <hr>
+        <ul class="showComment list-group">
+          <li class="" v-for="comment in comments" v-bind:key="comment"><h5>{{ comment.login }}</h5><p>{{ comment.contenu_commentaire}}</p><hr></li>
+        </ul>
     </div>
 </template>
 
