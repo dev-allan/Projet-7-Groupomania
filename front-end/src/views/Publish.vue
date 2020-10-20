@@ -23,6 +23,8 @@ export default {
   },
   methods: {
     sendArticle(){
+      // document.location.reload(true)
+      document.location.href = "/#/accueil"
       var token = localStorage.getItem('accessToken');
       var decoded = jwt_decode(token);
       var body = {
@@ -38,9 +40,6 @@ export default {
         },
       })
       .then(res => console.log(res))
-      // .catch((error) => {
-      //   console.error(error)
-      // })
     }
   },
 }

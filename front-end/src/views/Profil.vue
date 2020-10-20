@@ -33,6 +33,7 @@ export default {
     },
 
     deleteAccount(){
+      window.location = "/";
       axios.delete('http://localhost:3000/utilisateurs/delete/', {
         headers : {
           'Authorization' : localStorage.getItem('accessToken'),

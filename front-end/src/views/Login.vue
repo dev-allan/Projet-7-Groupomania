@@ -94,7 +94,7 @@
                     .then(function(response){
                         if (response.ok){
                             response.json().then(function(){
-                                console.log("compte crée")
+                                alert("compte créé")
                             })
                         }else {
                             alert("Email ou mot de passe incorrect")
